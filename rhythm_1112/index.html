@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>Game</title>
+  </head>
+
+  <body>    
+    <audio class="song" src="media/metronome_sound.mp3"></audio>
+
+    <main>
+      <div class="game">
+        <div class="hit">
+          <div class="hit__combo"></div>
+          <div class="hit__accuracy"></div>
+        </div>
+
+        <div class="track-container"></div>
+
+        <div class="key-container" id="key-container">
+        </div>
+      </div>
+
+      <div class="menu">
+        <div>
+          <h1>Rhythm</h1>
+        </div>
+
+        <div class="menu__config">
+          <div class="config__speed">
+            <h2>Speed</h2>
+            <div>
+              <a class="btn btn--small btn--selected" href="#">1x</a>
+              <a class="btn btn--small" href="#">2x</a>
+              <a class="btn btn--small" href="#">3x</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu_start">
+          <a class="btn btn--primary btn--start" href="#">Start</a>
+        </div>
+      </div>
+
+      <div class="summary">
+        <div class="summary__timer"></div>
+        <div class="summary__result">
+          <h2 class="result__heading">Clear</h2>
+          <div class="result__accuracy perfect">
+            <p class="accuracy__heading">Perfect</p>
+            <span>:</span>
+            <p class="accuracy__count perfect__count"></p>
+          </div>
+          <div class="result__accuracy good">
+            <p class="accuracy__heading">Good</p>
+            <span>:</span>
+            <p class="accuracy__count good__count"></p>
+          </div>
+          <div class="result__accuracy bad">
+            <p class="accuracy__heading">Bad</p>
+            <span>:</span>
+            <p class="accuracy__count bad__count"></p>
+          </div>
+          <div class="result__accuracy miss">
+            <p class="accuracy__heading">Miss</p>
+            <span>:</span>
+            <p class="accuracy__count miss__count"></p>
+          </div>
+          <div class="result__accuracy combo">
+            <p class="accuracy__heading">Max Combo</p>
+            <span>:</span>
+            <p class="accuracy__count combo__count"></p>
+          </div>
+          <div class="result__accuracy score">
+            <p class="accuracy__heading">Score</p>
+            <span>:</span>
+            <p class="accuracy__count score__count"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-container">
+        <div>
+          <label for="numKeys">키 개수:</label>
+          <input type="number" id="numKeys" min="1" max="16" value="7">
+        </div>
+    
+        <div>
+          <label for="keyValues">키 값 (쉼표로 구분):</label>
+          <input type="text" id="keyValues" placeholder="예: S,D,F,Space,J,K,L" value="S,D,F,Space,J,K,L">
+        </div>
+    
+        <div>
+          <button id="setKeys">키 설정</button>
+        </div>
+      </div>
+
+      <div class="metronomeControls">
+        <label for="bpm">BPM:</label>
+        <input type="number" id="bpm" min="0" step="1" value="150">
+        <br>
+        
+        <label for="bit">비트 수:</label>
+        <input type="number" id="bit" min="1" value="4">
+        <br>
+    
+        <button id="setRhythm">적용</button>
+        <br>
+      </div>
+    </main>
+    
+    <script src="scripts/song.js"></script>
+    <script src="scripts/script.js"></script>
+  </body>
+</html>
