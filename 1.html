@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메트로놈 게임</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, select {
+            margin: 10px;
+        }
+        .feedback {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h1>메트로놈 게임</h1>
+<label for="bpm">BPM:</label>
+<input type="number" id="bpm" min="0" step="0.1" value="120">
+<br>
+
+<label for="bit">비트 수:</label>
+<input type="number" id="bit" min="1" value="4">
+<br>
+
+<button id="start">시작</button>
+<button id="stop" disabled>정지</button>
+
+<div id="status"></div>
+<audio id="metronome" src="sound/metronome_sound.mp3"></audio>
+
+<script>
+    let intervalId;
+    const metronomeSound = document.getElementById('metronome');
+    const statusDiv = document.getElementById('status');
+
+    const playClickSound = () => {
+        const sound = new Audio(metronomeSound.src);
+        sound.play();
+    };
+
+    document.getElementById('start').addEventListener('click', () => {
+        const bpm = parseFloat(document.getElementById('bpm').value);
+        const bitCount = parseInt(document.getElementById('bit').value);
+
+        if (bpm <= 0) {
+            statusDiv.textContent = "BPM은 0 초과의 실수여야 합니다.";
+            return;
+        }
+        if (bitCount < 1) {
+            statusDiv.textContent = "비트 수는 1 이상이어야 합니다.";
+            return;
+        }
+
+        const interval = (240 / (bpm * bitCount)) * 1000;
+
+        intervalId = setInterval(() => {
+            playClickSound();
+        }, interval);
+
+        statusDiv.textContent = `현재 BPM: ${bpm}, 비트 수: ${bitCount}`;
+        document.getElementById('start').disabled = true;
+        document.getElementById('stop').disabled = false;
+    });
+
+    document.getElementById('stop').addEventListener('click', () => {
+        clearInterval(intervalId);
+        statusDiv.textContent = "";
+        document.getElementById('start').disabled = false;
+        document.getElementById('stop').disabled = true;
+    });
+</script>
+
+</body>
+</html>
